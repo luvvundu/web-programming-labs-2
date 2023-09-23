@@ -6,3 +6,8 @@ img {
     border: 5px solid;
     box-shadow: 2px 1px 5px;
 }
+
+header, footer {
+    color: brown;
+    font-size: 30px;
+}
