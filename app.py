@@ -19,6 +19,16 @@ def menu():
             НГТУ, ФБ, WEB-программирование, часть 2. Список лабораторных
         </header>
 
+        <h3>Меню:</h3>
+        <ol>
+            <li>
+            <a href='/lab1'>Первая лабораторная работа</a>
+            </li>
+            <li>
+            <a href='/lab2'>Вторая лабораторная работа</a>
+            </li>
+        </ol>
+
         <footer style='margin-top:20px;'>
             &copy; Итегелова Виктория Олеговна, ФБИ-13, 3 курс, 2023
         </footer>
@@ -39,7 +49,7 @@ def lab1():
             НГТУ, ФБ, WEB-программирование, часть 2. Список лабораторных
         </header>
 
-        <h1> Первая лабораторная</h1>
+        <h1>Первая лабораторная</h1>
         <p>
         Flask — фреймворк для создания веб-приложений на языке
         программирования Python, использующий набор инструментов
@@ -193,7 +203,7 @@ def example():
         {'book' : '5 языков любви', 'author' : 'Гэри  Чепмен', 'zhanr' : 'Практическая психология', 'str' : 130},
     ]
 
-    return render_template('example.html',
+    return render_template('example.html', 
                             number_lab = number_lab,
                               name=name, group = group, 
                               number_kurs = number_kurs, 
