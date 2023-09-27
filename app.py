@@ -204,3 +204,7 @@ def example():
 @app.route('/lab2/')
 def lab2():
     return render_template('lab2.html')
+
+@app.route('/lab2/cartoons')
+def cartoons():
+    return render_template('cartoons.html')
