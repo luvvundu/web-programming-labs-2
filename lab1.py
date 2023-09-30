@@ -1,4 +1,4 @@
-from flask import Blueprint, redirect, url_for
+from flask import Blueprint, redirect, url_for, render_template
 lab1 = Blueprint('lab1', __name__)
 
 
@@ -27,7 +27,10 @@ def menu():
             <a href='/lab1'>Первая лабораторная работа</a>
             </li>
             <li>
-            <a href='/lab2'>Вторая лабораторная работа</a>
+            <a href='/lab2/'>Вторая лабораторная работа</a>
+            </li>
+            <li>
+            <a href='/lab3/'>Третья лабораторная работа</a>
             </li>
         </ol>
 
