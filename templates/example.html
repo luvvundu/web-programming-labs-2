@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+    {% if name %}
+        {{ name }},
+    {% else %}
+        Компания Анонимуса,
+    {% endif %}
+    
+    {{ number_lab }}
+    </title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
+</head>
+<body>
+    <header>
+        WEB-программирование, часть 2. {% if number_lab %}Лабораторная работа 2{% endif %}
+    </header>
+
+    <main>
+    <a href="/menu">Меню</a><br>
+       5 + 2 = {{ 5 + 2 }}<br>
+       11 * 28 = {{ 11 * 28 }}<br>
+       8452/793 = {{ 8452 / 793 }}<br>
+       45<sup>8</sup> = {{ 45 ** 8 }}<br>
+       <ul>
+            {% for f in fruits %}
+            <li>{{ f.name }} : {{ f.price }} &#x20bd; </li>
+            {% endfor %}
+       </ul>
+
+       <h2>Список моих любимых книг:</h2>
+       <ul>
+            {% for b in books %}
+            <li>{{ b.book }} : {{ b.author }} : {{ b.zhanr }} : {{ b.str }} страниц </li>
+            {% endfor %}
+       </ul>
+    </main>
+
+    <footer>
+        &copy; 
+        {% if name %}
+            {{ name }},
+        {% else %}
+            Анонимус,
+        {% endif %}
+
+        {% if group %}
+            {{ group }},
+        {% else %}
+            Группа Анонимуса,
+        {% endif %}
+        
+        {% if number_kurs %}
+            {{ number_kurs }},
+        {% else %}
+            Курс Аноним,
+        {% endif %}
+
+        2023
+    </footer>
+</body>
+</html>
