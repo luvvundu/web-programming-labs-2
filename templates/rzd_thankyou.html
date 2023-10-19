@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block lab %}Лабораторная работа №3{% endblock %}
+
+{% block main %}
+
+    {% if user %}
+
+    <h1>Здравствуйте, {{ user.fio }}!</h1>
+    <h2>Спасибо за покупку билета!</h2>
+
+    <div>ФИО заказчика: {{ user.fio }}</div>
+    <div>Тип билета: {{ 'Взрослый' if user.ticketType == 'adult' else 'Детский' }}</div>
+    <div>Тип полки: {{ user.polkaType }}</div>
+    <div>Наличие багажа: {{'Да' if user.withLuggage == 'yes' else 'Нет' }}</div>
+    <div>Возраст: {{ user.age }}</div>
+    <div>Место отправки: {{ user.startPoint }}</div>
+    <div>Место назначения: {{ user.endPoint }}</div>
+    <div>Дата: {{ user.date }}</div>
+
+    <div>
+        <a href ="/lab3/rzd_order"> Заново </a>
+    </div>
+
+    {% endif %}
+{% endblock %} 
