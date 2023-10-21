@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+
+{% block lab %}Лабораторная работа 4.{% endblock %}
+
+{% block main %}
+    <h2>Холодильник</h2>
+    <form method="POST">
+        <label for="temperature">Температура (°C):</label>
+        <input type="number" id="temperature" name="temperature">
+        <input type="submit" value="Установить температуру">
+    </form>
+
+    {% if temperature %}
+        {% if error %}
+            <p style="color: red; font-weight: bold;">{{ error }}</p>
+        {% elif temperature <= -12 %}
+            <p>Установлена температура: {{ temperature }}°C</p>
+            <img src="snow.jpg" height="20" width="20">
+            <img src="snow.jpg" height="20" width="20">
+            <img src="snow.jpg" height="20" width="20">
+        {% elif temperature <= -8 %}
+            <p>Установлена температура: {{ temperature }}°C</p>
+            <img src="snow.jpg" height="20" width="20">
+            <img src="snow.jpg" height="20" width="20">
+        {% elif temperature <= -4 %}
+            <p>Установлена температура: {{ temperature }}°C</p>
+            <img src="snow.jpg" height="20" width="20">
+        {% else %}
+            <p>Установлена температура: {{ temperature }}°C</p>
+        {% endif %}
+    {% endif %}
+    <br>
+    <br>
+    <br>
+    <a href="/lab4/fridge">Назад</a>
+
+{% endblock %}
