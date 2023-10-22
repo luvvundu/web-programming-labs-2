@@ -50,3 +50,55 @@ def fridge():
         return render_template("fridge.html", temperature=temperature, error=error)
 
     return render_template("fridge.html")
+
+
+@lab4.route("/lab4/zerno", methods=["GET", "POST"])
+def zerno():
+    if request.method == "POST":
+        zerno = request.form.get("zerno")
+        weight = request.form.get("weight")
+
+        if not weight:
+            error = "Ошибка: не введён вес"
+            return render_template("zerno.html", error=error)
+
+        try:
+            weight = float(weight)
+            if weight <= 0:
+                error = "Ошибка: неверное значение веса"
+                return render_template("zerno.html", error=error)
+        except ValueError:
+            error = "Ошибка: неверное значение веса"
+            return render_template("zerno.html", error=error)
+
+        prices = {
+            "ячмень": 12000,
+            "овёс": 8500,
+            "пшеница": 8700,
+            "рожь": 14000
+        }
+
+        if weight > 500:
+            error = "Извините, такого объёма сейчас нет в наличии"
+            return render_template("zerno.html", error=error)
+
+        order_total = prices[zerno] * weight
+        discount = weight > 50
+
+        return render_template("zerno_success.html", zerno=zerno, weight=weight, order_total=order_total, discount=discount)
+
+    return render_template("zerno.html")
+
+
+@lab4.route('/lab4/cookies', methods = ['GET', 'POST'])
+def cookies():
+    if request.method == 'GET':
+        return render_template('cookies.html')
+    
+    color = request.form.get('color')
+    headers = {
+        'Set-Cookie': 'color=' + color + '; path=/',
+        'Location': '/lab4/cookies'
+    }
+    return '', 303, headers
+    
