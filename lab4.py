@@ -20,10 +20,10 @@ def login():
     if username == 'alex' and password == '123':
         return render_template('success.html')
     
-    if not username:
+    if username == '':
         error_username = "Не введен логин"
 
-    if not password:
+    if password == '':
         error_password = "Не введен пароль"
     
     error = 'Неверные логин и/или пароль'
