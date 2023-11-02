@@ -1,9 +1,9 @@
 {% extends 'base.html' %}
 
-
-{% block lab %}Лабораторная работа 4.{% endblock %}
+{% block lab %}Лабораторная работа №4{% endblock %}
 
 {% block main %}
+
     <h2>Холодильник</h2>
     <form method="POST">
         <label for="temperature">Температура (°C):</label>
@@ -11,24 +11,26 @@
         <input type="submit" value="Установить температуру">
     </form>
 
-    {% if temperature %}
+    {% if temperature != None %}
         {% if error %}
             <p style="color: red; font-weight: bold;">{{ error }}</p>
         {% elif temperature <= -12 %}
             <p>Установлена температура: {{ temperature }}°C</p>
-            <img src="{{ url_for('static', filename = 'snow.jpg') }}" height="20" width="20">
-            <img src="{{ url_for('static', filename = 'snow.jpg') }}" height="20" width="20">
-            <img src="{{ url_for('static', filename = 'snow.jpg') }}" height="20" width="20">
+            <img src="{{ url_for('static', filename = 'snow.jpg') }}" height="40" width="40">
+            <img src="{{ url_for('static', filename = 'snow.jpg') }}" height="40" width="40">
+            <img src="{{ url_for('static', filename = 'snow.jpg') }}" height="40" width="40">
         {% elif temperature <= -8 %}
             <p>Установлена температура: {{ temperature }}°C</p>
-            <img src="{{ url_for('static', filename = 'snow.jpg') }}" height="20" width="20">
-            <img src="{{ url_for('static', filename = 'snow.jpg') }}" height="20" width="20">
+            <img src="{{ url_for('static', filename = 'snow.jpg') }}" height="40" width="40">
+            <img src="{{ url_for('static', filename = 'snow.jpg') }}" height="40" width="40">
         {% elif temperature <= -4 %}
             <p>Установлена температура: {{ temperature }}°C</p>
-            <img src="{{ url_for('static', filename = 'snow.jpg') }}" height="20" width="20">
+            <img src="{{ url_for('static', filename = 'snow.jpg') }}" height="40" width="40">
         {% else %}
             <p>Установлена температура: {{ temperature }}°C</p>
         {% endif %}
+    {% else %}
+        <p style="color: red; font-weight: bold;">{{ error }}</p>
     {% endif %}
     <br>
     <br>

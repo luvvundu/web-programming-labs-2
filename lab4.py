@@ -1,24 +1,23 @@
-from flask import Blueprint, render_template, request
+from flask import Blueprint, render_template, request, make_response, after_this_request
 lab4 = Blueprint('lab4', __name__)
-
 
 @lab4.route('/lab4/')
 def lab():
     return render_template('lab4.html')
 
-
 @lab4.route('/lab4/login', methods = ['GET','POST'])
 def login():
     error_username = None
     error_password = None
-
+    
     if request.method == 'GET': 
         return render_template('login.html')
 
     username = request.form.get('username')
     password = request.form.get('password')
+    
     if username == 'alex' and password == '123':
-        return render_template('success.html')
+        return render_template('success.html', username=username)
     
     if username == '':
         error_username = "Не введен логин"
@@ -27,8 +26,8 @@ def login():
         error_password = "Не введен пароль"
     
     error = 'Неверные логин и/или пароль'
-    return render_template('login.html', error=error, error_username=error_username, error_password=error_password)
-
+    return render_template('login.html', error = error, error_username = error_username,
+                            error_password = error_password)
 
 @lab4.route("/lab4/fridge", methods=["GET", "POST"])
 def fridge():
@@ -37,7 +36,7 @@ def fridge():
 
         if not temperature:
             error = "Ошибка: не задана температура"
-            return render_template("fridge.html", error=error)
+            return render_template("fridge.html", temperature=None, error=error)
 
         temperature = int(temperature)
         if temperature < -12:
@@ -49,27 +48,13 @@ def fridge():
 
         return render_template("fridge.html", temperature=temperature, error=error)
 
-    return render_template("fridge.html")
-
+    return render_template("fridge.html", temperature=None)
 
 @lab4.route("/lab4/zerno", methods=["GET", "POST"])
 def zerno():
     if request.method == "POST":
         zerno = request.form.get("zerno")
         weight = request.form.get("weight")
-
-        if not weight:
-            error = "Ошибка: не введён вес"
-            return render_template("zerno.html", error=error)
-
-        try:
-            weight = float(weight)
-            if weight <= 0:
-                error = "Ошибка: неверное значение веса"
-                return render_template("zerno.html", error=error)
-        except ValueError:
-            error = "Ошибка: неверное значение веса"
-            return render_template("zerno.html", error=error)
 
         prices = {
             "ячмень": 12000,
@@ -78,27 +63,53 @@ def zerno():
             "рожь": 14000
         }
 
-        if weight > 500:
-            error = "Извините, такого объёма сейчас нет в наличии"
+        if not zerno:
+            error = "Ошибка: не верно выбрано зерно."
+            return render_template("zerno.html", error=error)
+        
+        if not weight or int(weight) <= 0:
+            error = "Ошибка: не верно указан вес."
             return render_template("zerno.html", error=error)
 
-        order_total = prices[zerno] * weight
-        discount = weight > 50
+        weight = int(weight)
+
+        if weight > 500:
+            error = "Извините, такого объёма сейчас нет в наличии.  "
+            return render_template("zerno.html", error=error)
+
+        discount = False
+
+        if (weight >= 50):
+            order_total = (prices[zerno] * weight) * 0.9
+            discount = True
+        else:
+            order_total = prices[zerno] * weight
 
         return render_template("zerno_success.html", zerno=zerno, weight=weight, order_total=order_total, discount=discount)
 
     return render_template("zerno.html")
 
-
+    
+    
 @lab4.route('/lab4/cookies', methods = ['GET', 'POST'])
 def cookies():
     if request.method == 'GET':
         return render_template('cookies.html')
     
-    color = request.form.get('color')
-    headers = {
-        'Set-Cookie': 'color=' + color + '; path=/',
-        'Location': '/lab4/cookies'
-    }
-    return '', 303, headers
+    color_text = request.form.get('color_text')
+    color_bg = request.form.get('color_bg')
+    font_size = request.form.get('font_size')
+
+    response = make_response('', 303)
     
+    response.headers['Location'] = 'cookies'
+    
+    response.set_cookie('color', color_text)
+    response.set_cookie('bgColor', color_bg)
+    
+    if (not font_size):
+        return response
+
+    response.set_cookie('fontSize', font_size)
+    
+    return response
