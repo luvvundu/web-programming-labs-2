@@ -7,8 +7,6 @@ def lab():
 
 @lab4.route('/lab4/login', methods = ['GET','POST'])
 def login():
-    error_username = None
-    error_password = None
     
     if request.method == 'GET': 
         return render_template('login.html')
@@ -95,21 +93,20 @@ def zerno():
 def cookies():
     if request.method == 'GET':
         return render_template('cookies.html')
-    
-    color_text = request.form.get('color_text')
+
+    color = request.form.get('color_text')
     color_bg = request.form.get('color_bg')
-    font_size = request.form.get('font_size')
+    fontsize = request.form.get('font_size')
 
-    response = make_response('', 303)
-    
-    response.headers['Location'] = 'cookies'
-    
-    response.set_cookie('color', color_text)
-    response.set_cookie('bgColor', color_bg)
-    
-    if (not font_size):
-        return response
+    headers = {
+        'Set-Cookie': [
+            'color=' + color + '; path=/',
+            'color_bg=' + color_bg + '; path=/',
+            'font_size=' + fontsize + '; path=/',
+        ],
+        'Location': '/lab4/cookies'
+    }
 
-    response.set_cookie('fontSize', font_size)
+    return '', 303, headers
     
-    return response
+
