@@ -25,3 +25,18 @@ def main():
 
     return "go to console"
 
+@lab5.route('/lab5/users')
+def users():
+    conn = psycopg2.connect(
+        host='127.0.0.1',
+        database='knowledge_base',
+        user='ivictoria_knowledge_base',
+        password='12345'
+    )
+
+    cur = conn.cursor()
+    cur.execute('SELECT * FROM users;')
+
+    result = cur.fetchall()
+    
+    return(result)
