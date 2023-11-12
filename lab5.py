@@ -19,22 +19,9 @@ def dbClose(cursor, connection):
 
 @lab5.route('/lab5')
 def main():
-    conn = dbConnect()
+    visibleUser = 'Anon'
 
-    cur = conn.cursor()
-
-    cur.execute('SELECT * FROM users;')
-
-    result = cur.fetchall()
-
-    cur.close()
-    conn.close()
-
-    print(result)
-
-    dbClose(cur, conn)
-    
-    return "go to console"
+    return render_template('lab5.html', username = visibleUser)
 
 @lab5.route('/lab5/users')
 def users():
