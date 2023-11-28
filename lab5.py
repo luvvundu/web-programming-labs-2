@@ -12,7 +12,7 @@ def lab():
 
 def dbConnect():
     conn = psycopg2.connect(
-         host='127.0.0.1',
+        host='127.0.0.1',
         database='knowledge_base',
         user='ivictoria_knowledge_base',
         password='12345'
@@ -68,8 +68,7 @@ def registerPage():
     username = request.form.get("username")
     password = request.form.get("password")
 
-
-    if not (username or password):
+    if username == "" or password == "":
         errors.append("Пожалуйста заполните все поля")
         print(errors)
         return render_template('register.html', errors=errors)
@@ -86,6 +85,7 @@ def registerPage():
         conn.close()
         cur.close()
         return render_template('register.html', errors=errors)
+    
 
     cur.execute("INSERT INTO users (username, password) VALUES (%s, %s);", (username, hashPassword))
 
