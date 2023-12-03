@@ -209,7 +209,7 @@ def getArticle(article_id):
 
         text = articleBody[1].splitlines()
 
-    return render_template("articlesN.html", article_text=text, article_title=articleBody[0], username = username)
+    return render_template("articles.html", article_text=text, article_title=articleBody[0], username = username)
     
 @lab5.route('/lab5/logout')
 def logout():
