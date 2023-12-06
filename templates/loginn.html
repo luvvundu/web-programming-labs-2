@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block lab %}Лабораторная работа 6.{% endblock %}
+
+{% block main %}
+    <h1>Вход</h1>
+    <h2>Пожалуйста, авторизуйтесь</h2>
+    <div>
+        {{ error }}
+    </div>
+    <form method="post">
+        <div>
+            <label for="username">Пользователь</label>
+            <input type="text" id="username" name="username">
+            {% if error_username %}
+            <p style="color: red; font-weight: bold;">{{ error_username }}</p>
+            {% endif %} 
+        </div>
+        <div>
+            <label for="password">Пароль:</label>
+            <input type="password" id="password" name="password">
+        </div>
+            {% if error_password %}
+            <p style="color: red; font-weight: bold;">{{ error_password }}</p>
+            {% endif %}
+        <div>
+            <button type="submit">Войти</button>
+            <button type="reset">Отмена</button>
+        </div>
+    </form>
+{% endblock %}

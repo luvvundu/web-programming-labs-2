@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block lab %} Лабораторная работа 6 {% endblock %}
+
+{% block main %}
+    <h1>
+        База знаний
+    </h1>
+        <div>
+            <a href="/lab6/articless">Посмотреть заметки</a>
+        </div>
+
+        <div>
+            <a href="/lab6/newarticle">Создать заметки</a>
+        </div>
+            
+        <form action="/lab6/loginn">
+            <button class="button1" type="submit">Логин</button>
+        </form>
+
+        <form action="/lab6/registerr">
+            <button class="button1" type="submit">Регистрация</button>
+        </form>
+
+        <form action="/lab6/logout">
+            <button class="button1" type="submit">Выйти</button>
+        </form>
+
+    {% if current_user.username %}
+        {{ current_user.username }}
+    {% else %}
+        <div>Anon</div>
+    {% endif %}
+        <div>Статьи пользователя, {{ current_user.username }}</div>
+        <h1>Мои статьи</h1>
+        <ul>
+            {% for articles in articles %}
+                <li>{{ articles.title }} <a href="/lab6/articles/{{ articles.id }}"></a></li>
+            {% endfor %}
+        </ul>
+    {% endblock %}
+
