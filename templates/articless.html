@@ -34,8 +34,8 @@
         <div>Статьи пользователя, {{ current_user.username }}</div>
         <h1>Мои статьи</h1>
         <ul>
-            {% for articles in articles %}
-                <li>{{ articles.title }} <a href="/lab6/articles/{{ articles.id }}"></a></li>
+            {% for article in articles %}
+                <li>{{ article.title }} <a href="/lab6/articless/{{ article.id }}">{{ article.article_text }}</a></li>
             {% endfor %}
         </ul>
     {% endblock %}

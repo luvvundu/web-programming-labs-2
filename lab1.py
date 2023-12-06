@@ -41,6 +41,9 @@ def menu():
             <li>
             <a href='/lab6/'>Шестая лабораторная работа</a>
             </li>
+            <li>
+            <a href='/lab7/'>Седьмая лабораторная работа</a>
+            </li>
         </ol>
 
         <footer style='margin-top:20px;'>

@@ -11,7 +11,7 @@ class users (db.Model, UserMixin):
 
 
 class articles (db.Model):
-    id = db. Column(db.Integer, primary_key=True)
+    id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     title = db.Column(db.String(50), nullable=False)
     article_text = db.Column(db.Text, nullable=False)

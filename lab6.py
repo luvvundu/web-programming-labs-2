@@ -1,8 +1,9 @@
-from flask import Blueprint, render_template, request, redirect, session
+from flask import Blueprint, render_template, request, redirect, session, abort
 from Db import db
 from Db.models import users, articles
 from werkzeug.security import check_password_hash, generate_password_hash
 from flask_login import login_user, login_required, current_user, logout_user
+
 
 lab6 = Blueprint("lab6", __name__)
 
@@ -134,7 +135,10 @@ def getArticle(article_id):
             if article.user_id == current_user.id or article.is_public:
                 text = article.article_text.splitlines()
                 return render_template("articlescheck.html", article_text=text, article_title=article.title, username=current_user.username)
-
+        else:
+            abort(404)
+    else:
+        abort(403)
 
 @lab6.route('/lab6/logout')
 @login_required
