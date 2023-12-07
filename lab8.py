@@ -12,7 +12,7 @@ courses = [
     {'name': 'c#', 'videos': 8}
 ]
 
-@lab8.route('/lab8/api/courses', methods = ['GET'])
+@lab8.route('/lab8/api/courses/', methods = ['GET'])
 def get_courses():
     return courses
 
