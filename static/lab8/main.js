@@ -28,6 +28,9 @@ function fillCourseList() {
                 deleteCourse(i);
             };
 
+            let tdData = document.createElement('td'); 
+            tdData.innerText = courses[i].data || 'не указано';
+
             let tdActions = document.createElement('td');
             tdActions.append(editButton);
             tdActions.append(delButton);
@@ -35,6 +38,7 @@ function fillCourseList() {
             tr.append(tdName);
             tr.append(tdVideos);
             tr.append(tdPrice);
+            tr.append(tdData)
             tr.append(tdActions);
 
             tbody.append(tr);
